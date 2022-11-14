@@ -1,10 +1,5 @@
 import mongoose, { trusted } from 'mongoose';
 const UserSchema = new mongoose.Schema({
-    userid:{
-        type: String,
-        required: true,
-        unique:true
-    },
     username:{
         type: String,
         required: true,

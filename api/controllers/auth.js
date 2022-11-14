@@ -9,7 +9,6 @@ export const register = async(req ,res, next)=>{
         const hash = bcrypt.hashSync(req.body.password, salt);
 
         const newUser = new User({
-            userid:req.body.userid,
             username:req.body.username,
             email:req.body.email,
             password:hash, 
@@ -17,7 +16,7 @@ export const register = async(req ,res, next)=>{
             phonenumber:req.body.phonenumber,
             age:req.body.age
         })
-
+ 
         await newUser.save()
         res.status(200).send("User has been created")
     } catch (err) {
@@ -26,7 +25,7 @@ export const register = async(req ,res, next)=>{
 };
 export const login = async(req ,res, next)=>{
     try {
-        const user = await User.findOne({userid: req.body.userid});
+        const user = await User.findOne({username: req.body.username});
         if(!user) return next( (404, "User not found!"));
 
         const isPasswordCorrect = await bcrypt.compare(
